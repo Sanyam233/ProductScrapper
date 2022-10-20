@@ -39,12 +39,9 @@ class ProductScrapper:
         for url in new_products:
             product_row = old_products.loc[old_products["url"] == url]
             if not product_row.empty:
-                print("NEXT")
-                print(f"{product_row}")
                 old_price = product_row.iloc[0]["price"]
                 new_price = new_products[url]["price"]
                 price_diff = ((new_price - old_price)/old_price) * 100
-                # print(f"{str(old_price)}")
                 if price_diff < -10:
                     potential_buys[url] = {"title": new_products[url]["title"], "old_price": old_price,
                                            "new_price": new_price, "precentage_decrease": round(price_diff, 2)}
